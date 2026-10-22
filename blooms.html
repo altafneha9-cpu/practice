@@ -1,0 +1,1147 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blooms & Petals</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+    <style>
+
+        /* ================= GENERAL ================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #fcf9f4;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: rgba(255, 250, 245, 0.97);
+            padding: 18px 7%;
+            box-shadow: 0 3px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 30px;
+            font-weight: bold;
+            color: #3f5945 !important;
+            letter-spacing: 1px;
+        }
+
+        .navbar-brand span {
+            color: #bd7884;
+        }
+
+        .nav-link {
+            color: #454545 !important;
+            margin: 0 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #bd7884 !important;
+        }
+
+        .order-btn {
+            background: #3f5945;
+            color: white !important;
+            padding: 10px 21px !important;
+            border-radius: 30px;
+            transition: 0.4s;
+        }
+
+        .order-btn:hover {
+            background: #bd7884;
+            transform: translateY(-2px);
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            width: 92%;
+            height: 600px;
+            margin: 28px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+        }
+
+        .carousel,
+        .carousel-inner,
+        .carousel-item {
+            height: 100%;
+        }
+
+        .carousel-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(20,30,23,0.70),
+                    rgba(20,30,23,0.18),
+                    rgba(20,30,23,0.05)
+                );
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 9%;
+            transform: translateY(-50%);
+            max-width: 560px;
+            color: white;
+            animation: heroText 1.2s ease;
+        }
+
+        .hero-small {
+            font-family: Arial, sans-serif;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 13px;
+            margin-bottom: 15px;
+            color: #f3d3d7;
+        }
+
+        .hero-content h1 {
+            font-size: 64px;
+            line-height: 1.05;
+            margin-bottom: 22px;
+        }
+
+        .hero-content p {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 470px;
+            margin-bottom: 28px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: #bd7884;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            transition: 0.4s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero-btn:hover {
+            background: #3f5945;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+
+
+        /* ================= FLOATING PETALS ================= */
+
+        .petal {
+            position: fixed;
+            top: -50px;
+            font-size: 22px;
+            opacity: 0.55;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear infinite;
+        }
+
+        .petal1 {
+            left: 10%;
+            animation-duration: 9s;
+        }
+
+        .petal2 {
+            left: 35%;
+            animation-duration: 12s;
+            animation-delay: 3s;
+        }
+
+        .petal3 {
+            left: 65%;
+            animation-duration: 10s;
+            animation-delay: 1s;
+        }
+
+        .petal4 {
+            left: 85%;
+            animation-duration: 13s;
+            animation-delay: 5s;
+        }
+
+
+        /* ================= SECTIONS ================= */
+
+        .section {
+            padding: 100px 8%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-label {
+            font-family: Arial, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #bd7884;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .section-heading h2 {
+            font-size: 46px;
+            color: #3f5945;
+            margin-top: 10px;
+        }
+
+        .section-heading p {
+            font-family: Arial, sans-serif;
+            color: #777;
+            margin-top: 12px;
+        }
+
+
+        /* ================= FLOWER CARDS ================= */
+
+        .flower-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 100%;
+            box-shadow: 0 8px 30px rgba(52,67,55,0.09);
+            transition: 0.5s;
+        }
+
+        .flower-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 18px 45px rgba(52,67,55,0.16);
+        }
+
+        .flower-img {
+            height: 310px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .flower-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        /* ZOOM IN */
+
+        .flower-card:hover .flower-img img {
+            transform: scale(1.15);
+        }
+
+        .flower-img::after {
+            content: "VIEW COLLECTION";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(255,255,255,0.92);
+            color: #3f5945;
+            padding: 11px 18px;
+            border-radius: 25px;
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .flower-card:hover .flower-img::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .flower-info {
+            text-align: center;
+            padding: 25px 20px;
+        }
+
+        .flower-info h4 {
+            color: #3f5945;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .flower-info p {
+            font-family: Arial, sans-serif;
+            color: #777;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .flower-line {
+            width: 40px;
+            height: 2px;
+            background: #bd7884;
+            margin: 15px auto;
+        }
+
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            background: #f0eee7;
+        }
+
+        .about-img {
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 470px;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.1);
+        }
+
+        .about-text {
+            padding: 25px 20px;
+        }
+
+        .about-text h2 {
+            color: #3f5945;
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            font-family: Arial, sans-serif;
+            color: #666;
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+
+
+        /* ================= SERVICES ================= */
+
+        .service-box {
+            background: #fff;
+            padding: 40px 25px;
+            text-align: center;
+            border-radius: 20px;
+            height: 100%;
+            border: 1px solid #eee7df;
+            transition: 0.5s;
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px);
+            border-color: #bd7884;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.09);
+        }
+
+        .service-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #f8e8ea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            transition: 0.4s;
+        }
+
+        .service-box:hover .service-icon {
+            transform: rotate(8deg) scale(1.1);
+            background: #3f5945;
+        }
+
+        .service-box h4 {
+            color: #3f5945;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .service-box p {
+            font-family: Arial, sans-serif;
+            color: #777;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+
+        /* ================= QUOTE ================= */
+
+        .quote-section {
+            background:
+                linear-gradient(rgba(63,89,69,0.92), rgba(63,89,69,0.92)),
+                url("images/bouquet.jpg");
+
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 100px 20px;
+            color: white;
+        }
+
+        .quote-section h2 {
+            font-size: 48px;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.3;
+        }
+
+        .quote-section p {
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+            color: #e9e9e9;
+        }
+
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            padding: 90px 20px;
+            text-align: center;
+            background: #fffaf5;
+        }
+
+        .contact h2 {
+            color: #3f5945;
+            font-size: 46px;
+        }
+
+        .contact p {
+            font-family: Arial, sans-serif;
+            color: #777;
+            margin: 15px 0 28px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #26352b;
+            color: white;
+            padding: 50px 20px 25px;
+            text-align: center;
+        }
+
+        footer h3 {
+            font-size: 30px;
+            color: #e7b4bb;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            font-family: Arial, sans-serif;
+            color: #c7c7c7;
+            font-size: 13px;
+        }
+
+        .footer-line {
+            width: 60px;
+            height: 2px;
+            background: #bd7884;
+            margin: 20px auto;
+        }
+
+
+        /* ================= ANIMATIONS ================= */
+
+        @keyframes heroText {
+
+            from {
+                opacity: 0;
+                transform: translateY(-35%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(-50%);
+            }
+
+        }
+
+        @keyframes fall {
+
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 768px) {
+
+            .hero {
+                width: 100%;
+                height: 550px;
+                margin-top: 0;
+                border-radius: 0;
+            }
+
+            .hero-content {
+                left: 7%;
+                right: 7%;
+            }
+
+            .hero-content h1 {
+                font-size: 43px;
+            }
+
+            .section {
+                padding: 70px 5%;
+            }
+
+            .section-heading h2 {
+                font-size: 36px;
+            }
+
+            .about-text h2 {
+                font-size: 36px;
+            }
+
+            .quote-section h2 {
+                font-size: 36px;
+            }
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- FLOATING PETALS -->
+
+<div class="petal petal1">🌸</div>
+<div class="petal petal2">🌷</div>
+<div class="petal petal3">🌸</div>
+<div class="petal petal4">🌷</div>
+
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg">
+
+    <a class="navbar-brand" href="#">
+        Blooms <span>&</span> Petals
+    </a>
+
+    <button class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarNav">
+
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav ms-auto align-items-center">
+
+            <li class="nav-item">
+                <a class="nav-link" href="#home">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#flowers">Flowers</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#services">Services</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link order-btn" href="#contact">
+                    Contact Us
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section id="home" class="hero">
+
+    <div id="flowerCarousel"
+    class="carousel slide"
+    data-bs-ride="carousel"
+    data-bs-interval="5500">
+
+
+        <div class="carousel-indicators">
+
+            <button type="button"
+            data-bs-target="#flowerCarousel"
+            data-bs-slide-to="0"
+            class="active"></button>
+
+            <button type="button"
+            data-bs-target="#flowerCarousel"
+            data-bs-slide-to="1"></button>
+
+            <button type="button"
+            data-bs-target="#flowerCarousel"
+            data-bs-slide-to="2"></button>
+
+        </div>
+
+
+        <div class="carousel-inner">
+
+
+            <!-- VIDEO 1 -->
+
+            <div class="carousel-item active">
+
+                <video src="flower1.mp4"
+                autoplay muted loop playsinline>
+                </video>
+
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+
+                    <div class="hero-small">
+                        Welcome to Blooms & Petals
+                    </div>
+
+                    <h1>
+                        Where Every Bloom Tells a Story
+                    </h1>
+
+                    <p>
+                        Elegant flowers, thoughtfully arranged
+                        to turn ordinary moments into beautiful memories.
+                    </p>
+
+                    <a href="#flowers" class="hero-btn">
+                        Explore Collection
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VIDEO 2 -->
+
+            <div class="carousel-item">
+
+                <video src="flower2.mp4"
+                autoplay muted loop playsinline>
+                </video>
+
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+
+                    <div class="hero-small">
+                        Fresh • Elegant • Timeless
+                    </div>
+
+                    <h1>
+                        Nature's Beauty, Beautifully Arranged
+                    </h1>
+
+                    <p>
+                        Discover floral designs created with
+                        care, creativity and a love for nature.
+                    </p>
+
+                    <a href="#flowers" class="hero-btn">
+                        View Flowers
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VIDEO 3 -->
+
+            <div class="carousel-item">
+
+                <video src="flower3.mp4"
+                autoplay muted loop playsinline>
+                </video>
+
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+
+                    <div class="hero-small">
+                        Made With Love
+                    </div>
+
+                    <h1>
+                        Flowers For Every Beautiful Moment
+                    </h1>
+
+                    <p>
+                        From celebrations to thoughtful gifts,
+                        let flowers say what words cannot.
+                    </p>
+
+                    <a href="#contact" class="hero-btn">
+                        Contact Us
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <button class="carousel-control-prev"
+        type="button"
+        data-bs-target="#flowerCarousel"
+        data-bs-slide="prev">
+
+            <span class="carousel-control-prev-icon"></span>
+
+        </button>
+
+
+        <button class="carousel-control-next"
+        type="button"
+        data-bs-target="#flowerCarousel"
+        data-bs-slide="next">
+
+            <span class="carousel-control-next-icon"></span>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FEATURED FLOWERS ================= -->
+
+<section id="flowers" class="section">
+
+    <div class="section-heading">
+
+        <div class="section-label">
+            Our Collection
+        </div>
+
+        <h2>Featured Blooms</h2>
+
+        <p>
+            Carefully selected flowers for life's special moments.
+        </p>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="row g-4">
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="flower-card">
+
+                    <div class="flower-img">
+
+                        <img src="images/rose.jpg"
+                        alt="Elegant Roses">
+
+                    </div>
+
+                    <div class="flower-info">
+
+                        <h4>Elegant Roses</h4>
+
+                        <div class="flower-line"></div>
+
+                        <p>
+                            Timeless roses arranged with elegance
+                            and a touch of romance.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="flower-card">
+
+                    <div class="flower-img">
+
+                        <img src="images/tulip.jpg"
+                        alt="Fresh Tulips">
+
+                    </div>
+
+                    <div class="flower-info">
+
+                        <h4>Fresh Tulips</h4>
+
+                        <div class="flower-line"></div>
+
+                        <p>
+                            Fresh and colourful tulips
+                            made to brighten someone's day.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="flower-card">
+
+                    <div class="flower-img">
+
+                        <img src="images/bouquet.jpg"
+                        alt="Luxury Bouquet">
+
+                    </div>
+
+                    <div class="flower-info">
+
+                        <h4>Luxury Bouquets</h4>
+
+                        <div class="flower-line"></div>
+
+                        <p>
+                            Beautifully crafted bouquets
+                            for unforgettable occasions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about" class="section about">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+
+            <div class="col-lg-6">
+
+                <div class="about-img">
+
+                    <img src="images/wedding.jpg"
+                    alt="Wedding Flowers">
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="about-text">
+
+                    <div class="section-label">
+                        Our Story
+                    </div>
+
+                    <h2>
+                        The Art of Beautiful Blooms
+                    </h2>
+
+                    <p>
+                        At Blooms & Petals, we believe that
+                        flowers are more than beautiful decorations.
+                        They are a way to express love, happiness,
+                        gratitude and unforgettable memories.
+                    </p>
+
+                    <p>
+                        Every arrangement is carefully designed
+                        with fresh blooms, elegant details and
+                        a passion for natural beauty.
+                    </p>
+
+                    <a href="#services" class="hero-btn">
+                        Discover Our Services
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SERVICES ================= -->
+
+<section id="services" class="section">
+
+    <div class="section-heading">
+
+        <div class="section-label">
+            What We Do
+        </div>
+
+        <h2>Our Floral Services</h2>
+
+        <p>
+            Designed with care for your most meaningful moments.
+        </p>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="row g-4">
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-box">
+
+                    <div class="service-icon">
+                        💐
+                    </div>
+
+                    <h4>Custom Bouquets</h4>
+
+                    <p>
+                        Personalised arrangements created
+                        especially for your loved ones.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-box">
+
+                    <div class="service-icon">
+                        🌸
+                    </div>
+
+                    <h4>Wedding Flowers</h4>
+
+                    <p>
+                        Elegant floral designs that make
+                        your special day even more memorable.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="service-box">
+
+                    <div class="service-icon">
+                        🎁
+                    </div>
+
+                    <h4>Floral Gifts</h4>
+
+                    <p>
+                        Thoughtful flower gifts for birthdays,
+                        anniversaries and celebrations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= QUOTE ================= -->
+
+<section class="quote-section">
+
+    <h2>
+        "Flowers are the music of the ground."
+    </h2>
+
+    <p>
+        Let every petal bring a little more beauty into your day.
+    </p>
+
+</section>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact" class="contact">
+
+    <div class="section-label">
+        Get In Touch
+    </div>
+
+    <h2>
+        Let's Make Someone Smile
+    </h2>
+
+    <p>
+        Have a special occasion? Let us create something beautiful.
+    </p>
+
+    <a href="mailto:hello@bloomsandpetals.com"
+    class="hero-btn">
+        Contact Blooms & Petals
+    </a>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h3>Blooms & Petals</h3>
+
+    <div class="footer-line"></div>
+
+    <p>
+        Where every bloom tells a story.
+    </p>
+
+    <p>
+        © 2026 Blooms & Petals. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</b
+```
